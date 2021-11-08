@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 const hbs = exphbs.create({});
 
 const {User} = require("./models")
+const routes = require("./controllers")
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
@@ -15,6 +16,8 @@ app.use(express.static("public"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(routes)
 
 sequelize.sync({ force: false }).then(function() {
     app.listen(PORT, function() {
