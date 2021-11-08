@@ -39,4 +39,24 @@ router.post("/newproject",(req,res)=>{
     })
 })
 
+router.put("/projectimg",(req,res)=>{
+    if(!req.session.user){
+        res.redirect("/api/login")
+        return
+    }
+    Project.update({
+        img:req.body.img
+    },
+    {
+        where: {
+            title:req.body.title
+        }
+    }).then(profileImg=>{
+        res.json(profileImg)
+    }).catch(err=>{
+        console.log(err),
+        res.status(500).json({message:"An Error Occured",err:err})
+    })
+})
+
 module.exports = router

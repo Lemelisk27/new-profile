@@ -156,8 +156,34 @@ router.get("/newproject",(req,res)=>{
     })
 })
 
-router.get("/sessions",(req,res)=>{
-    res.json(req.session)
+router.get("/applytoproject/:id",(req,res)=>{
+    if(!req.session.user){
+        res.redirect("/api/login")
+        return
+    }
+    const api = true
+    const apipage = "/applytoproject"
+    Image.findOne({
+        where: {
+            id:req.params.id
+        }
+    }).then(imgData=>{
+        const hbsImg = imgData.get({plain:true})
+        Project.findAll({
+            attributes:["title"],
+            where: {
+                UserId:req.session.user.id
+            }
+        }).then(projectData=>{
+            const hbsProject = projectData.map(pro=>pro.get({plain:true}))
+            res.render("applytoproject",{
+                img:hbsImg,
+                project:hbsProject,
+                api:api,
+                apipage:apipage
+            })
+        })
+    })
 })
 
 module.exports = router
