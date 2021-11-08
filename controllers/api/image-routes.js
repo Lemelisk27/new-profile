@@ -9,6 +9,7 @@ router.get("/",(req,res)=>{
         return
     }
     User.findAll({
+        attributes: ["username"],
         include:[Image]
     }).then(imgData=>{
         const hbsImg = imgData.map(img=>img.get({plain:true}))

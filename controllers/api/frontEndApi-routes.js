@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const sequelize = require('../../config/connection');
-const {User,Image} = require("../../models")
+const {User,Image,Project} = require("../../models")
 
 router.get("/",(req,res)=>{
     const api = true
@@ -120,6 +120,31 @@ router.get("/password",(req,res)=>{
         api:api,
         apipage:apipage
     })
+})
+
+router.get("/viewprojects",(req,res)=>{
+    if(!req.session.user){
+        res.redirect("/api/login")
+        return
+    }
+    const api = true
+    const apipage = "/viewprojects"
+    Project.findAll({
+        where: {
+            UserId:req.session.user.id
+        }
+    }).then(projectData=>{
+        const hbsProject = projectData.map(project=>project.get({plain:true}))
+        res.render("viewprojects",{
+            project:hbsProject,
+            api:api,
+            apipage:apipage
+        })
+    })
+})
+
+router.get("/sessions",(req,res)=>{
+    res.json(req.session)
 })
 
 module.exports = router
