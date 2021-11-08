@@ -35,4 +35,21 @@ router.post("/",(req,res)=>{
     })
 })
 
+router.delete("/",(req,res)=>{
+    if(!req.session.user){
+        res.redirect("/api/login")
+        return
+    }
+    Image.destroy({
+        where: {
+            id:req.body.id
+        }
+    }).then(delImg=>{
+        res.json(delImg)
+    }).catch(err=>{
+        console.log(err)
+        res.status(500).json({message:"An Error Occured",err:err})
+    })
+})
+
 module.exports = router

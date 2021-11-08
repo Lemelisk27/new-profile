@@ -4,7 +4,7 @@
 
 <div class="d-flex flex-row flex-wrap mx-auto justify-content-center">
     {{#each img}}
-    <a href="/userimage/{{id}}" class="d-flex flex-column col-lg-3 m-1 justify-content-center p-2 border" id="userImg">
+    <a href="/api/viewimages/{{id}}" class="d-flex flex-column col-lg-3 m-1 justify-content-center p-2 border" id="userImg">
         <img src="{{url}}" alt="User Picture {{id}}">
     </a>
     {{/each}}

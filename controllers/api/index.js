@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const frontEndApi = require("./frontEndApi")
-const userRoutes = require("./users")
-const imageRoutes = require("./images")
+const frontEndApi = require("./frontEndApi-routes")
+const userRoutes = require("./user-routes")
+const imageRoutes = require("./image-routes")
 
 router.use(frontEndApi)
 router.use("/users",userRoutes)

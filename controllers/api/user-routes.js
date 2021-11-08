@@ -49,4 +49,38 @@ router.get("/logout",(req,res)=>{
     res.redirect("/api/login")
 })
 
+router.put("/",(req,res)=>{
+    if(!req.session.user){
+        res.redirect("/api/login")
+        return
+    }
+    User.update(
+        {
+            first_name:req.body.first_name,
+            last_name:req.body.last_name,
+            email:req.body.email,
+            profile_pic:req.body.profile_pic,
+            bio:req.body.bio,
+            phone:req.body.phone,
+            linkedin:req.body.linkedin,
+            github:req.body.github,
+            street:req.body.street,
+            city:req.body.city,
+            state:req.body.state,
+            zip:req.body.zip,
+            password:req.body.password
+        },
+        {
+            where: {
+                id:req.session.user.id
+            }
+        }
+    ).then(updateUser=>{
+        res.json(updateUser)
+    }).catch(err=>{
+        console.log(err)
+        res.status(500).json({message:"An Error Occured",err:err})
+    })
+})
+
 module.exports = router

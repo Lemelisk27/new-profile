@@ -67,4 +67,25 @@ router.get("/viewimages",(req,res)=>{
     })
 })
 
+router.get("/viewimages/:id",(req,res)=>{
+    if(!req.session.user){
+        res.redirect("/api/login")
+        return
+    }
+    const api = true
+    const apipage = "/viewimages"
+    Image.findOne({
+        where: {
+            id:req.params.id
+        }
+    }).then(imgData=>{
+        const hbsImg = imgData.get({plain:true})
+        res.render("viewimagesbyid",{
+            img:hbsImg,
+            api:api,
+            apipage:apipage
+        })
+    })
+})
+
 module.exports = router
