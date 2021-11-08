@@ -75,7 +75,7 @@ User.init({
             newUser.password = bcrypt.hashSync(newUser.password,10)
             return newUser
         },
-        beforeSave(updatedUser){
+        beforeUpdate(updatedUser){
             updatedUser.password = bcrypt.hashSync(updatedUser.password,10);
             return updatedUser;
         }
