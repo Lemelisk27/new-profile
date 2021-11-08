@@ -49,10 +49,14 @@ router.get("/logout",(req,res)=>{
     res.redirect("/api/login")
 })
 
-router.put("/",(req,res)=>{
+router.put("/", async (req,res)=>{
     if(!req.session.user){
         res.redirect("/api/login")
         return
+    }
+    let updatedPassword = ""
+    if(req.body.password){
+        updatedPassword = await bcrypt.hash(req.body.password,10)
     }
     User.update(
         {
@@ -68,7 +72,7 @@ router.put("/",(req,res)=>{
             city:req.body.city,
             state:req.body.state,
             zip:req.body.zip,
-            password:req.body.password
+            password:updatedPassword
         },
         {
             where: {

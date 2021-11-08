@@ -109,4 +109,17 @@ router.get("/updateprofile",(req,res)=>{
     })
 })
 
+router.get("/password",(req,res)=>{
+    if(!req.session.user){
+        res.redirect("/api/login")
+        return
+    }
+    const api = true
+    const apipage = "/password"
+    res.render("password",{
+        api:api,
+        apipage:apipage
+    })
+})
+
 module.exports = router

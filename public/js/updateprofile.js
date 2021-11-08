@@ -60,7 +60,6 @@ submitBtn.addEventListener("click",(e)=>{
         linkedin:linkedin,
         bio:bio
     }
-    console.log(JSON.stringify(userObj))
     fetch("/api/users",{
         method:"PUT",
         body:JSON.stringify(userObj),
