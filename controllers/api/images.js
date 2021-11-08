@@ -19,4 +19,20 @@ router.get("/",(req,res)=>{
     })
 })
 
+router.post("/",(req,res)=>{
+    if(!req.session.user){
+        res.redirect("/api/login")
+        return
+    }
+    Image.create({
+        url:req.body.url,
+        UserId:req.session.user.id
+    }).then(newImg=>{
+        res.json(newImg)
+    }).catch(err=>{
+        console.log(err)
+        res.status(500).json({message:"An Error Occured",err:err})
+    })
+})
+
 module.exports = router
