@@ -88,4 +88,25 @@ router.get("/viewimages/:id",(req,res)=>{
     })
 })
 
+router.get("/updateprofile",(req,res)=>{
+    if(!req.session.user){
+        res.redirect("/api/login")
+        return
+    }
+    const api = true
+    const apipage = "/updateprofile"
+    User.findOne({
+        where: {
+            id:req.session.user.id
+        }
+    }).then(userData=>{
+        const hbsUser = userData.get({plain:true})
+        res.render("updateprofile",{
+            user:hbsUser,
+            api:api,
+            apipage:apipage
+        })
+    })
+})
+
 module.exports = router

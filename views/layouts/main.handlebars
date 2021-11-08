@@ -24,7 +24,10 @@
         {{else}}
                 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <h1 class="justify-content-start align-self-center p-2 text-light">Zach Smith</h1>
+                <div class="d-flex flex-row align-items-center bg-light rounded">
+                    <h1 class="text-dark px-2">Zach Smith</h1>
+                    <img src="{{user.profile_pic}}" style="height: 4rem" alt="Zach Smith">
+                </div>
                 <div class="navbar-nav col align-self-center justify-content-end">
                     <a class="nav-link text-light" href="#">About Me</a>
                     <a class="nav-link text-light" href="#">Work</a>

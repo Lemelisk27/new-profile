@@ -1,10 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const sequelize = require('../config/connection');
-const {User,Image} = require("../models")
+const {User} = require("../models")
 
 router.get("/",(req,res)=>{
-    res.render("homepage")
+    User.findOne({
+        where: {
+            id:1
+        }
+    }).then(userData=>{
+        const hbsUser = userData.get({plain:true})
+        res.render("homepage",{
+            user:hbsUser
+        })
+    })
 })
 
 module.exports = router
