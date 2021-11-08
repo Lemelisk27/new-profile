@@ -20,4 +20,23 @@ router.get("/",(req,res)=>{
     })
 })
 
+router.post("/newproject",(req,res)=>{
+    if(!req.session.user){
+        res.redirect("/api/login")
+        return
+    }
+    Project.create({
+        title:req.body.title,
+        description:req.body.description,
+        github_url:req.body.github_url,
+        site_url:req.body.site_url,
+        UserId:req.session.user.id
+    }).then(newProject=>{
+        res.json(newProject)
+    }).catch(err=>{
+        console.log(err)
+        res.status(500).json(newProject)
+    })
+})
+
 module.exports = router

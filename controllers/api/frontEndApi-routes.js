@@ -143,6 +143,19 @@ router.get("/viewprojects",(req,res)=>{
     })
 })
 
+router.get("/newproject",(req,res)=>{
+    if(!req.session.user){
+        res.redirect("/api/login")
+        return
+    }
+    const api = true
+    const apipage = "/newproject"
+    res.render("newproject",{
+        api:api,
+        apipage:apipage
+    })
+})
+
 router.get("/sessions",(req,res)=>{
     res.json(req.session)
 })

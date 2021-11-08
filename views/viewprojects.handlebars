@@ -5,10 +5,12 @@
         <h3>{{title}}</h3>
         <a href="/viewprojects/{{id}}"><img src="{{img}}" alt="Project {{id}}" class="col-lg-12"></a>
         <h5>{{description}}</h5>
-        <a href="{{site_url}}" class="text-light">Website: {{title}}</a>
-        <a href="{{github_url}}" class="text-light mb-4">GitHub Repository</a>
+        <a href="{{site_url}}" target="_blank" class="text-light">Website: {{title}}</a>
+        <a href="{{github_url}}" target="_blank" class="text-light mb-4">GitHub Repository</a>
     </div>
     {{/each}}
 </div>
 
-<button class="d-flex col-lg-2 mx-auto mb-5 bg-dark text-light text-center">Create New Project</button>
+<button class="d-flex col-lg-2 mx-auto mb-5 bg-dark text-light justify-content-center" id="submitBtn">Create New Project</button>
+
+<script src="/js/viewprojects.js"></script>
